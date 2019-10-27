@@ -1,5 +1,5 @@
 <template>
-  <v-card class="d-inline-block">
+  <v-card class="d-inline-block" :class="show ? '' : 'hide'">
     <div
       :style="
         'background-image: url(' +
@@ -8,7 +8,6 @@
           `background-position: ${shiftRight}px ${shiftTop}px; `
       "
       class="card"
-      :class="show ? '' : 'hide'"
     ></div>
   </v-card>
 </template>
@@ -24,8 +23,11 @@ export default {
     col: {
       type: Number
     },
-    shirt:{
+    shirt: {
       type: Boolean
+    },
+    debug: {
+      type: Number
     }
   },
   data() {
@@ -37,7 +39,7 @@ export default {
       test: 1
     }
   },
-  computed:{
+  computed: {
     shiftRight() {
       if (this.shirt) {
         return -this.left * 13
@@ -52,6 +54,7 @@ export default {
     }
   },
   created() {
+    console.log('row -' + this.row, 'coll - ' + this.col, this.debug, Math.ceil((this.debug + 1) / 9))
 
   },
   mounted() {
@@ -59,7 +62,6 @@ export default {
       this.row = 2
       this.col = 13
     }
-    console.log(this.col, this.row)
   }
 }
 </script>
