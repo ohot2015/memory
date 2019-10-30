@@ -2,17 +2,19 @@
   <v-container class="center board"  >
     <v-row align="center" justify="center" md-6>
       <v-col
-        v-for="( col, key) in arr"
+        v-for="( col, key) in deck"
         :key="key"
         class="text-center cards-col-grow"
         justify="center"
+        ref="key"
+        @click="revertCard(key)"
       >
         <card
           :show="show"
-          :row="0 "
-          :col="col"
+          :row="Math.floor(col / cardSuitLength)"
+          :col="col % cardSuitLength"
           :shirt="shirt"
-          :debug="key"
+
         ></card>
       </v-col>
     </v-row>
@@ -20,32 +22,33 @@
 </template>
 <script>
 import card from '@/components/card'
+
 export default {
   components: { card },
   data() {
     return {
       show: true,
       shirt: false,
+      cardSuitLength: 13,
+      openCard: 0
     }
   },
   computed: {
-    row(key) {
-      return Math.round((key + 1) / 9) + this.cardSuit
-    },
-    arr() {
-      return this.shuffle([...Array(9).keys()].concat([...Array(9).keys()]))
+    deck() {
+      return this
+        .shuffle([...Array(9).keys()]
+          .concat(Array.from({length: 9}, (v, k) => k + this.cardSuitLength))
+        )
     }
   },
   mounted() {
-   console.log(this.arr)
+    // console.log(this.deck)
     // start game
-    //    setTimeout(()=>{
-    //      this.shirt = true
-    //    },5000)
+//        setTimeout(()=>{
+//          this.shirt = true
+//        },5000)
   },
-  created() {
 
-  },
   methods: {
     shuffle(a) {
       for (let i = a.length - 1; i > 0; i--) {
@@ -54,13 +57,11 @@ export default {
       }
       return a
     },
-    randInt(min, max) {
-      // получить случайное число от (min-0.5) до (max+0.5)
-      const rand = min - 0.5 + Math.random() * (max - min + 1)
-      return Math.round(rand)
+    revertCard(e) {
+      console.log(123)
+      console.log(e)
     }
   }
-
 }
 </script>
 

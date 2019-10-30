@@ -53,10 +53,6 @@ export default {
       return -this.top * this.row
     }
   },
-  created() {
-    console.log('row -' + this.row, 'coll - ' + this.col, this.debug, Math.ceil((this.debug + 1) / 9))
-
-  },
   mounted() {
     if (this.shirt) {
       this.row = 2
