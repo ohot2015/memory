@@ -1,5 +1,5 @@
 <template>
-  <v-container class="center board"  >
+  <v-container class="center board">
     <v-row align="center" justify="center" md-6>
       <v-col
         v-for="( col, key) in deck"
@@ -52,8 +52,8 @@ export default {
   methods: {
     shuffle(a) {
       for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]]
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[a[i], a[j]] = [a[j], a[i]]
       }
       return a
     },
