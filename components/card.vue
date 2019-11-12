@@ -1,5 +1,9 @@
 <template>
-  <v-card class="d-inline-block" :class="show ? '' : 'hide'">
+  <v-card
+    class="d-inline-block"
+    :class="show ? '' : 'hide'"
+    @click="$emit('clickToCard', [row, col])"
+  >
     <div
       :style="
         'background-image: url(' +
